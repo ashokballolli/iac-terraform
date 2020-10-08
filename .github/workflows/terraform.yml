@@ -99,7 +99,8 @@ jobs:
           cd setup
           pwd
           ls -la
-          terraform plan   -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
+          #terraform plan   -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
+          terraform plan -var-file backend/backend.tfvars  -auto-approve
 
       # On push to master, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -109,4 +110,4 @@ jobs:
           cd setup
           pwd
           ls -la
-          terraform destroy  -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
+          terraform destroy   -var-file backend/backend.tfvars  -auto-approve
