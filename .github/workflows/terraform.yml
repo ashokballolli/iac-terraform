@@ -102,4 +102,5 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: |
           cd setup
-          terraform apply -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
+          #terraform apply -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
+          terraform destroy  -auto-approve
