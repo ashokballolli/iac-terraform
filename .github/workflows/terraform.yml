@@ -103,4 +103,4 @@ jobs:
       run: |
           cd setup
           #terraform apply -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
-          terraform destroy  -auto-approve
+          terraform destroy -var='rds_username=postgres' -var='rds_password=9739929985' -var='email_addresses=["ballolliashok@gmail.com"]' -auto-approve
