@@ -94,7 +94,7 @@ jobs:
     - name: Terraform Plan
       run: |
           cd setup
-          terraform plan -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'
+          terraform plan -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'  -auto-approve
 
       # On push to master, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
@@ -102,5 +102,5 @@ jobs:
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: |
           cd setup
-          #terraform apply -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'
-          terraform destroy -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'
+          terraform apply -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'  -auto-approve
+          #terraform destroy -var='rds_username=${{ secrets.RDS_USERNAME }}' -var='rds_password=${{ secrets.RDS_PASSWORD }}' -var='email_addresses=${{ secrets.EMAIL_ADDRESSES }}'  -auto-approve
