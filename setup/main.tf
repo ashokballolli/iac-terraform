@@ -6,6 +6,22 @@ terraform {
   required_version = ">= 0.13.4"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "acg-etl-terraform-state"
+    key    = "default-infrastructure"
+    region = "eu-central-1"
+  }
+}
+
+resource "aws_s3_bucket" "terraform_state" {
+  bucket = "acg-etl-terraform-state"
+
+  versioning {
+    enabled = true
+  }
+}
+
 module "rds" {
   source = "../modules/rds"
   rds_database_name = "acg_challenge_sept"
@@ -76,20 +92,4 @@ module "cloudwatch_rule_event" {
   lambda_function_arn = module.lambda_function.function_arn
   lambda_function_name = module.lambda_function.function_name
   schedule_expression = "cron(0 1 * * ? *)"
-}
-
-terraform {
-  backend "s3" {
-    bucket = "acg-etl-terraform-state"
-    key    = "default-infrastructure"
-    region = "eu-central-1"
-  }
-}
-
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "acg-etl-terraform-state"
-
-  versioning {
-    enabled = true
-  }
 }
